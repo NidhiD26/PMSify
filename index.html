@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMSify - Your Personal Period Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌸 PMSify</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="#history" class="nav-link">History</a></li>
+                <li><a href="#settings" class="nav-link">Settings</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Welcome to PMSify</h1>
+                <p>Your personal, private period companion. Track your cycle, mood, and wellness with complete privacy.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showSection('dashboard')">Start Tracking</button>
+                    <button class="btn btn-secondary" onclick="showSection('history')">View History</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="cycle-visual">
+                    <div class="cycle-circle">
+                        <div class="phase menstrual">🌙</div>
+                        <div class="phase follicular">🌱</div>
+                        <div class="phase ovulation">🌸</div>
+                        <div class="phase luteal">🍂</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>Why Choose PMSify?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Cycle Tracking</h3>
+                    <p>Easy period and ovulation tracking with predictions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💭</div>
+                    <h3>Mood & Symptoms</h3>
+                    <p>Log your daily mood and symptoms with simple taps</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Smart Reminders</h3>
+                    <p>Get gentle reminders for your cycle and self-care</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Your data stays on your device - completely private</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1>Your Dashboard</h1>
+                <div class="current-phase">
+                    <span id="current-phase-text">Calculating your cycle...</span>
+                    <div id="current-phase-icon">🌸</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Calendar Widget -->
+                <div class="widget calendar-widget">
+                    <h3>Period Calendar</h3>
+                    <div class="calendar" id="calendar"></div>
+                    <div class="calendar-actions">
+                        <button class="btn btn-small" onclick="markPeriodStart()">Mark Period Start</button>
+                        <button class="btn btn-small" onclick="markPeriodEnd()">Mark Period End</button>
+                    </div>
+                </div>
+
+                <!-- Quick Log Widget -->
+                <div class="widget quick-log-widget">
+                    <h3>Quick Log</h3>
+                    <div class="mood-tracker">
+                        <h4>How are you feeling today?</h4>
+                        <div class="mood-options">
+                            <button class="mood-btn" data-mood="great">😊</button>
+                            <button class="mood-btn" data-mood="good">🙂</button>
+                            <button class="mood-btn" data-mood="okay">😐</button>
+                            <button class="mood-btn" data-mood="bad">😔</button>
+                            <button class="mood-btn" data-mood="terrible">😢</button>
+                        </div>
+                    </div>
+                    
+                    <div class="symptoms-tracker">
+                        <h4>Symptoms</h4>
+                        <div class="symptoms-grid">
+                            <button class="symptom-btn" data-symptom="cramps">🤕 Cramps</button>
+                            <button class="symptom-btn" data-symptom="headache">🤯 Headache</button>
+                            <button class="symptom-btn" data-symptom="bloating">🎈 Bloating</button>
+                            <button class="symptom-btn" data-symptom="fatigue">😴 Fatigue</button>
+                            <button class="symptom-btn" data-symptom="cravings">🍫 Cravings</button>
+                            <button class="symptom-btn" data-symptom="acne">🔴 Acne</button>
+                        </div>
+                    </div>
+
+                    <div class="flow-tracker">
+                        <h4>Flow Level</h4>
+                        <div class="flow-options">
+                            <button class="flow-btn" data-flow="light">Light</button>
+                            <button class="flow-btn" data-flow="medium">Medium</button>
+                            <button class="flow-btn" data-flow="heavy">Heavy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Tip Widget -->
+                <div class="widget tip-widget">
+                    <h3>Daily Tip</h3>
+                    <div class="tip-content" id="daily-tip">
+                        <div class="tip-icon">💡</div>
+                        <p id="tip-text">Loading your personalized tip...</p>
+                    </div>
+                </div>
+
+                <!-- Water Tracker Widget -->
+                <div class="widget water-widget">
+                    <h3>Water Intake</h3>
+                    <div class="water-tracker">
+                        <div class="water-visual">
+                            <div class="water-bottle">
+                                <div class="water-level" id="water-level"></div>
+                            </div>
+                        </div>
+                        <div class="water-controls">
+                            <p>Glasses today: <span id="water-count">0</span>/8</p>
+                            <button class="btn btn-small" onclick="addWater()">Add Glass 💧</button>
+                            <button class="btn btn-small" onclick="resetWater()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Period Widget -->
+                <div class="widget prediction-widget">
+                    <h3>Predictions</h3>
+                    <div class="predictions">
+                        <div class="prediction-item">
+                            <span class="prediction-label">Next Period:</span>
+                            <span class="prediction-value" id="next-period">Calculating...</span>
+                        </div>
+                        <div class="prediction-item">
+                            <span class="prediction-label">Fertile Window:</span>
+                            <span class="prediction-value" id="fertile-window">Calculating...</span>
+                        </div>
+                        <div class="prediction-item">
+                            <span class="prediction-label">Cycle Day:</span>
+                            <span class="prediction-value" id="cycle-day">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes Widget -->
+                <div class="widget notes-widget">
+                    <h3>Daily Notes</h3>
+                    <textarea id="daily-notes" placeholder="How are you feeling today? Any thoughts or observations..."></textarea>
+                    <button class="btn btn-small" onclick="saveNotes()">Save Notes</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="section">
+        <div class="history-container">
+            <h1>Cycle History</h1>
+            
+            <div class="history-stats">
+                <div class="stat-card">
+                    <h3>Average Cycle</h3>
+                    <span class="stat-value" id="avg-cycle">28 days</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Period</h3>
+                    <span class="stat-value" id="avg-period">5 days</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Last Period</h3>
+                    <span class="stat-value" id="last-period">-</span>
+                </div>
+            </div>
+
+            <div class="history-content">
+                <div class="history-chart">
+                    <h3>Cycle Length Trends</h3>
+                    <canvas id="cycle-chart" width="400" height="200"></canvas>
+                </div>
+
+                <div class="history-log">
+                    <h3>Recent Entries</h3>
+                    <div class="log-entries" id="log-entries">
+                        <!-- Entries will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings" class="section">
+        <div class="settings-container">
+            <h1>Settings</h1>
+            
+            <div class="settings-grid">
+                <div class="setting-group">
+                    <h3>Cycle Settings</h3>
+                    <div class="setting-item">
+                        <label for="cycle-length">Average Cycle Length:</label>
+                        <input type="number" id="cycle-length" min="21" max="35" value="28">
+                        <span>days</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="period-length">Average Period Length:</label>
+                        <input type="number" id="period-length" min="3" max="8" value="5">
+                        <span>days</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>Reminders</h3>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="period-reminders" checked>
+                            <span class="slider"></span>
+                            Period Reminders
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="ovulation-reminders" checked>
+                            <span class="slider"></span>
+                            Ovulation Reminders
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="selfcare-reminders" checked>
+                            <span class="slider"></span>
+                            Self-Care Reminders
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>Appearance</h3>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="dark-mode">
+                            <span class="slider"></span>
+                            Dark Mode
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>Data Management</h3>
+                    <button class="btn btn-secondary" onclick="exportData()">Export Data</button>
+                    <button class="btn btn-danger" onclick="clearAllData()">Clear All Data</button>
+                    <p class="privacy-note">🔒 All your data is stored locally on your device and never shared.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
