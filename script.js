@@ -1,6 +1,3 @@
-// PMSify - Period Tracking App
-// All data is stored locally for privacy
-
 class PMSify {
     constructor() {
         this.currentDate = new Date();
